@@ -143,8 +143,11 @@ def example_input():
     })
 
 if __name__ == '__main__':
-    # Change to backend directory
-    os.chdir('/home/asus/web projects/11. Data Science Education/backend')
+    # Set working directory to current directory (should be /app in container)
+    if not os.path.exists('dataset'):
+        # If dataset folder doesn't exist, we might need to change directory
+        backend_path = os.path.dirname(os.path.abspath(__file__))
+        os.chdir(backend_path)
     
     # Run the app
     app.run(debug=True, host='0.0.0.0', port=5000)
